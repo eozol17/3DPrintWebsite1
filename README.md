@@ -26,13 +26,17 @@ npx prisma migrate dev
 
 ### 3. Configure environment variables
 
-Edit `.env` in the project root:
+Copy the example and fill in your own values:
 
-```env
-DATABASE_URL="file:./dev.db"
-ADMIN_PASSWORD="admin3dprint"
-ADMIN_SESSION_SECRET="change-this-to-a-random-secret-in-production"
+```bash
+cp .env.example .env
+nano .env
 ```
+
+You need to set:
+- `DATABASE_URL` — SQLite path (default works for local dev)
+- `ADMIN_PASSWORD` — your admin panel password
+- `ADMIN_SESSION_SECRET` — generate with `openssl rand -base64 32`
 
 ### 4. Run the dev server
 
@@ -56,7 +60,7 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Admin Console
 
-- **Default password**: `admin3dprint` (change via `ADMIN_PASSWORD` in `.env`)
+- **Password**: Set via `ADMIN_PASSWORD` in your `.env` file
 - Update order status through the workflow: Pending → Reviewing → Quoted → Approved → Printing → Completed → Shipped
 - Set estimated prices and add notes visible to customers
 - Download uploaded 3D files
