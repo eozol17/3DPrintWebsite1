@@ -1,0 +1,31 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Order {
+  id               String   @id @default(cuid())
+  orderNumber      String   @unique
+  customerName     String
+  customerEmail    String
+  customerPhone    String?
+  fileName         String
+  fileOriginalName String
+  filePath         String
+  fileSize         Int
+  material         String
+  color            String
+  quantity         Int      @default(1)
+  infill           Int      @default(20)
+  notes            String?
+  status           String   @default("pending")
+  adminNotes       String?
+  estimatedPrice   Float?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
