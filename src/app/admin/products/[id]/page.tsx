@@ -12,6 +12,7 @@ import {
   ArrowLeft,
   Loader2,
   Trash2,
+  ShoppingCart,
 } from "lucide-react";
 import { PRODUCT_CATEGORIES } from "@/lib/utils";
 
@@ -180,6 +181,13 @@ export default function EditProductPage() {
           >
             <ShoppingBag className="w-5 h-5" />
             Ürünler
+          </Link>
+          <Link
+            href="/admin/purchases"
+            className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 font-medium text-sm transition-colors"
+          >
+            <ShoppingCart className="w-5 h-5" />
+            Mağaza Siparişleri
           </Link>
         </nav>
 

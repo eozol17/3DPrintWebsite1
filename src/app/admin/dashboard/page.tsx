@@ -15,6 +15,7 @@ import {
   Loader2,
   ArrowRight,
   ShoppingBag,
+  ShoppingCart,
 } from "lucide-react";
 import {
   ORDER_STATUSES,
@@ -118,6 +119,13 @@ export default function DashboardPage() {
           >
             <ShoppingBag className="w-5 h-5" />
             Ürünler
+          </Link>
+          <Link
+            href="/admin/purchases"
+            className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 font-medium text-sm transition-colors"
+          >
+            <ShoppingCart className="w-5 h-5" />
+            Mağaza Siparişleri
           </Link>
         </nav>
 
