@@ -7,6 +7,7 @@ import {
   Zap,
   Shield,
   Clock,
+  ShoppingBag,
 } from "lucide-react";
 
 export default function Home() {
@@ -25,6 +26,13 @@ export default function Home() {
               </span>
             </div>
             <div className="flex items-center gap-4">
+              <Link
+                href="/shop"
+                className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-600 hover:text-indigo-600 transition-colors"
+              >
+                <ShoppingBag className="w-4 h-4" />
+                Mağaza
+              </Link>
               <Link
                 href="/track"
                 className="text-sm font-medium text-slate-600 hover:text-indigo-600 transition-colors"
@@ -74,11 +82,11 @@ export default function Home() {
               Siparişe Başla
             </Link>
             <Link
-              href="/track"
+              href="/shop"
               className="inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-50 text-slate-700 font-semibold px-8 py-4 rounded-full text-lg border border-slate-200 transition-all hover:shadow-lg hover:-translate-y-0.5"
             >
-              <Search className="w-5 h-5" />
-              Sipariş Takip
+              <ShoppingBag className="w-5 h-5" />
+              Mağazayı Keşfet
             </Link>
           </div>
         </div>
@@ -237,6 +245,11 @@ export default function Home() {
             <span className="text-sm font-semibold text-slate-900">
               PrintFlow 3D
             </span>
+          </div>
+          <div className="flex items-center gap-4">
+            <Link href="/shop" className="text-sm text-slate-500 hover:text-slate-700 transition-colors">Mağaza</Link>
+            <Link href="/track" className="text-sm text-slate-500 hover:text-slate-700 transition-colors">Sipariş Takip</Link>
+            <Link href="/track-order" className="text-sm text-slate-500 hover:text-slate-700 transition-colors">Mağaza Takip</Link>
           </div>
           <p className="text-sm text-slate-500">
             &copy; {new Date().getFullYear()} PrintFlow 3D. Tüm hakları
