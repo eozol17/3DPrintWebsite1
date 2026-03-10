@@ -67,3 +67,32 @@ export const COLORS = [
   { value: "transparent", label: "Şeffaf" },
   { value: "custom", label: "Özel (notlarda belirtin)" },
 ];
+
+export function generatePurchaseNumber(): string {
+  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  let result = "MKT-";
+  for (let i = 0; i < 6; i++) {
+    result += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return result;
+}
+
+export const PURCHASE_STATUSES = {
+  pending: { label: "Beklemede", color: "bg-yellow-100 text-yellow-800" },
+  confirmed: { label: "Onaylandı", color: "bg-blue-100 text-blue-800" },
+  preparing: { label: "Hazırlanıyor", color: "bg-orange-100 text-orange-800" },
+  shipped: { label: "Kargoya Verildi", color: "bg-teal-100 text-teal-800" },
+  delivered: { label: "Teslim Edildi", color: "bg-green-100 text-green-800" },
+  cancelled: { label: "İptal Edildi", color: "bg-red-100 text-red-800" },
+} as const;
+
+export type PurchaseStatus = keyof typeof PURCHASE_STATUSES;
+
+export const PRODUCT_CATEGORIES = [
+  { value: "figurine", label: "Figür" },
+  { value: "jewelry", label: "Takı & Aksesuar" },
+  { value: "home", label: "Ev Dekorasyonu" },
+  { value: "gadget", label: "Aksesuar & Aparat" },
+  { value: "art", label: "Sanat & Tasarım" },
+  { value: "other", label: "Diğer" },
+];

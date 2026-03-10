@@ -29,3 +29,60 @@ model Order {
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
 }
+
+model Product {
+  id            String         @id @default(cuid())
+  slug          String         @unique
+  name          String
+  description   String?
+  price         Float
+  stock         Int            @default(0)
+  category      String?
+  images        String         @default("[]")
+  isActive      Boolean        @default(true)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  cartItems     CartItem[]
+  purchaseItems PurchaseItem[]
+}
+
+model Cart {
+  id        String     @id @default(cuid())
+  sessionId String     @unique
+  items     CartItem[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model CartItem {
+  id        String  @id @default(cuid())
+  cartId    String
+  cart      Cart    @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+  quantity  Int     @default(1)
+}
+
+model Purchase {
+  id            String         @id @default(cuid())
+  orderNumber   String         @unique
+  customerName  String
+  customerEmail String
+  customerPhone String?
+  address       String
+  totalPrice    Float
+  status        String         @default("pending")
+  items         PurchaseItem[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model PurchaseItem {
+  id         String   @id @default(cuid())
+  purchaseId String
+  purchase   Purchase @relation(fields: [purchaseId], references: [id], onDelete: Cascade)
+  productId  String
+  product    Product  @relation(fields: [productId], references: [id])
+  quantity   Int
+  unitPrice  Float
+}
