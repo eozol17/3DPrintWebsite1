@@ -14,6 +14,7 @@ import {
   AlertCircle,
   ChevronLeft,
   ChevronRight,
+  ShoppingBag,
 } from "lucide-react";
 import {
   ORDER_STATUSES,
@@ -114,7 +115,14 @@ export default function OrdersPage() {
             className="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-white/10 text-white font-medium text-sm"
           >
             <ClipboardList className="w-5 h-5" />
-            Siparişler
+            Özel Siparişler
+          </Link>
+          <Link
+            href="/admin/products"
+            className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 font-medium text-sm transition-colors"
+          >
+            <ShoppingBag className="w-5 h-5" />
+            Ürünler
           </Link>
         </nav>
 
