@@ -4,10 +4,14 @@ import { getSessionToken } from "@/lib/auth";
 export async function POST(request: NextRequest) {
   try {
     const { password } = await request.json();
-    const adminPassword = process.env.ADMIN_PASSWORD || "admin3dprint";
+    const adminPassword = process.env.ADMIN_PASSWORD;
+    if (!adminPassword) {
+      console.error("ADMIN_PASSWORD environment variable is not set");
+      return NextResponse.json({ error: "Sunucu yapılandırma hatası" }, { status: 500 });
+    }
 
     if (password !== adminPassword) {
-      return NextResponse.json({ error: "Invalid password" }, { status: 401 });
+      return NextResponse.json({ error: "Geçersiz şifre" }, { status: 401 });
     }
 
     const token = getSessionToken();
