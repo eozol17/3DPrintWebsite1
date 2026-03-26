@@ -3,7 +3,6 @@ import {
   Upload,
   Printer,
   Package,
-  Search,
   Zap,
   Shield,
   Clock,

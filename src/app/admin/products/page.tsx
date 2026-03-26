@@ -8,7 +8,6 @@ import {
   LayoutDashboard,
   ClipboardList,
   LogOut,
-  Package,
   Plus,
   Search,
   Pencil,
