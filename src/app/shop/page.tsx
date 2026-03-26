@@ -174,7 +174,7 @@ export default function ShopPage() {
                     <div className="aspect-square bg-gradient-to-br from-slate-50 to-indigo-50 flex items-center justify-center overflow-hidden">
                       {images.length > 0 ? (
                         <img
-                          src={`/api/files/${images[0]}`}
+                          src={`/api/images/${images[0]}`}
                           alt={product.name}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         />

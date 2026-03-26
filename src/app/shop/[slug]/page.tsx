@@ -148,7 +148,7 @@ export default function ProductDetailPage() {
             <div className="aspect-square bg-gradient-to-br from-slate-50 to-indigo-50 rounded-2xl overflow-hidden border border-slate-200 mb-4 flex items-center justify-center">
               {images.length > 0 ? (
                 <img
-                  src={`/api/files/${images[selectedImage]}`}
+                  src={`/api/images/${images[selectedImage]}`}
                   alt={product.name}
                   className="w-full h-full object-cover"
                 />
@@ -170,7 +170,7 @@ export default function ProductDetailPage() {
                       selectedImage === i ? "border-indigo-500" : "border-slate-200"
                     }`}
                   >
-                    <img src={`/api/files/${img}`} alt="" className="w-full h-full object-cover" />
+                    <img src={`/api/images/${img}`} alt="" className="w-full h-full object-cover" />
                   </button>
                 ))}
               </div>
