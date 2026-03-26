@@ -12,6 +12,8 @@ import {
   ArrowLeft,
   Loader2,
   ShoppingCart,
+  ImagePlus,
+  X,
 } from "lucide-react";
 import { PRODUCT_CATEGORIES } from "@/lib/utils";
 
@@ -28,6 +30,8 @@ export default function NewProductPage() {
   const router = useRouter();
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
+  const [images, setImages] = useState<string[]>([]);
+  const [uploadingImage, setUploadingImage] = useState(false);
   const [form, setForm] = useState({
     name: "",
     slug: "",
@@ -45,6 +49,25 @@ export default function NewProductPage() {
       name,
       slug: prev.slug === slugify(prev.name) || prev.slug === "" ? slugify(name) : prev.slug,
     }));
+  };
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploadingImage(true);
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      const res = await fetch("/api/products/images", { method: "POST", body: formData });
+      const data = await res.json();
+      if (!res.ok) { setError(data.error || "Resim yüklenemedi"); return; }
+      setImages((prev) => [...prev, data.filename]);
+    } catch {
+      setError("Resim yükleme hatası");
+    } finally {
+      setUploadingImage(false);
+      e.target.value = "";
+    }
   };
 
   const handleLogout = async () => {
@@ -66,7 +89,7 @@ export default function NewProductPage() {
           price: parseFloat(form.price),
           stock: parseInt(form.stock),
           category: form.category || null,
-          images: [],
+          images,
         }),
       });
 
@@ -251,6 +274,38 @@ export default function NewProductPage() {
                   <option key={c.value} value={c.value}>{c.label}</option>
                 ))}
               </select>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                Ürün Görselleri
+              </label>
+              <div className="flex flex-wrap gap-3 mb-3">
+                {images.map((filename, i) => (
+                  <div key={filename} className="relative w-24 h-24 rounded-lg overflow-hidden border border-slate-200">
+                    <img src={`/api/images/${filename}`} alt={`Görsel ${i + 1}`} className="w-full h-full object-cover" />
+                    <button
+                      type="button"
+                      onClick={() => setImages((prev) => prev.filter((f) => f !== filename))}
+                      className="absolute top-1 right-1 bg-red-600 text-white rounded-full w-5 h-5 flex items-center justify-center"
+                    >
+                      <X className="w-3 h-3" />
+                    </button>
+                  </div>
+                ))}
+                <label className="w-24 h-24 flex flex-col items-center justify-center border-2 border-dashed border-slate-300 rounded-lg cursor-pointer hover:border-indigo-400 transition-colors">
+                  {uploadingImage ? (
+                    <Loader2 className="w-5 h-5 animate-spin text-slate-400" />
+                  ) : (
+                    <>
+                      <ImagePlus className="w-5 h-5 text-slate-400 mb-1" />
+                      <span className="text-xs text-slate-400">Ekle</span>
+                    </>
+                  )}
+                  <input type="file" accept="image/*" className="hidden" onChange={handleImageUpload} disabled={uploadingImage} />
+                </label>
+              </div>
+              <p className="text-xs text-slate-400">JPG, PNG veya WebP. Maks 10MB.</p>
             </div>
 
             <div className="flex items-center gap-3">

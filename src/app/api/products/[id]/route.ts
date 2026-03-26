@@ -10,7 +10,6 @@ export async function GET(
     const product = await prisma.product.findFirst({
       where: {
         OR: [{ id: params.id }, { slug: params.id }],
-        isActive: true,
       },
     });
 
